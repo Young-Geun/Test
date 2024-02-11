@@ -88,6 +88,34 @@ class CafeKioskTest {
     }
 
     /**
+     * TDD
+     * - 테스트코드를 우선시 하는 개발 방법론.
+     * - Red(실패) -> Green(성공) -> Refactoring -> Red -> Green .. 순환 형태
+     * - 최초에는 테스트 코드가 없으니 Red 상태이고,
+     *   이후 calculateTotalPrice()를 어떻게든 성공 상태로 만들기 위해 구현부를 임의로라도 작성한다.
+     *       Ex) calculateTotalPrice()의 return 값을 8500원으로 하여 무조건 테스트케이스가 성공하록 작성.
+     *   그 후에는 calculateTotalPrice()를 정상적인 로직으로 리팩토링 한다.
+     *
+     * - 장점
+     *   1. 복잡도가 낮은, 테스트 가능한 코드를 구현할 수 있게 해준다.
+     *   2. 쉽게 발견하기 어려운 엣지케이스를 놓치지 않게 해준다.
+     *   3. 구현에 대한 빠른 피드백을 받을 수 있다.
+     *   4. 과감한 리팩토링이 가능해진다.
+     */
+    @Test
+    void calculateTotalPrice() {
+        CafeKiosk cafeKiosk = new CafeKiosk();
+        Americano americano = new Americano();
+        Latte latte = new Latte();
+
+        cafeKiosk.add(americano);
+        cafeKiosk.add(latte);
+
+        int totalPrice = cafeKiosk.calculateTotalPrice();
+        assertThat(totalPrice).isEqualTo(8500);
+    }
+
+    /**
      * 주문시간인 경우에만 성공하는 케이스
      */
     @Test
