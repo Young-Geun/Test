@@ -3,6 +3,7 @@ package org.example.kiosk.unit;
 import org.example.kiosk.unit.beverage.Americano;
 import org.example.kiosk.unit.beverage.Latte;
 import org.example.kiosk.unit.order.Order;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -22,6 +23,9 @@ class CafeKioskTest {
     }
 
     @Test
+    // @DisplayName("음료 1개 추가")
+    @DisplayName("음료 1개를 추가하면 주문 목록에 담긴다.")
+    // 명사의 나열보다 문장으로 작성하면 의도가 명확해진다.
     void add() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         cafeKiosk.add(new Americano());
@@ -92,15 +96,15 @@ class CafeKioskTest {
      * - 테스트코드를 우선시 하는 개발 방법론.
      * - Red(실패) -> Green(성공) -> Refactoring -> Red -> Green .. 순환 형태
      * - 최초에는 테스트 코드가 없으니 Red 상태이고,
-     *   이후 calculateTotalPrice()를 어떻게든 성공 상태로 만들기 위해 구현부를 임의로라도 작성한다.
-     *       Ex) calculateTotalPrice()의 return 값을 8500원으로 하여 무조건 테스트케이스가 성공하록 작성.
-     *   그 후에는 calculateTotalPrice()를 정상적인 로직으로 리팩토링 한다.
-     *
+     * 이후 calculateTotalPrice()를 어떻게든 성공 상태로 만들기 위해 구현부를 임의로라도 작성한다.
+     * Ex) calculateTotalPrice()의 return 값을 8500원으로 하여 무조건 테스트케이스가 성공하록 작성.
+     * 그 후에는 calculateTotalPrice()를 정상적인 로직으로 리팩토링 한다.
+     * <p>
      * - 장점
-     *   1. 복잡도가 낮은, 테스트 가능한 코드를 구현할 수 있게 해준다.
-     *   2. 쉽게 발견하기 어려운 엣지케이스를 놓치지 않게 해준다.
-     *   3. 구현에 대한 빠른 피드백을 받을 수 있다.
-     *   4. 과감한 리팩토링이 가능해진다.
+     * 1. 복잡도가 낮은, 테스트 가능한 코드를 구현할 수 있게 해준다.
+     * 2. 쉽게 발견하기 어려운 엣지케이스를 놓치지 않게 해준다.
+     * 3. 구현에 대한 빠른 피드백을 받을 수 있다.
+     * 4. 과감한 리팩토링이 가능해진다.
      */
     @Test
     void calculateTotalPrice() {
@@ -142,6 +146,14 @@ class CafeKioskTest {
     }
 
     @Test
+    // @DisplayName("특정 시간 이전에 주문을 생성하면 실패한다.")
+    @DisplayName("영업 시작 시간 이전에는 주문을 생성할 수 없다.")
+    /*
+        1. 도메인 용어를 사용하여 한층 추상화된 내용을 담는다.
+           Ex) '특정 시간'이라는 단어 대신 '영업 시작 시간'이라는 팀에서 사용하는 비즈니스 용어를 사용하도록 변경했다.
+        2. 테스트의 현상을 중점으로 기술하지 않는다.
+           Ex) '실패한다'라는 테스트 결과 관점의 용어 대신 '주문을 생성할 수 없다.'와 같이 기능 관점 용어를 사용한다.
+     */
     void createOrderOutsideOpenTime() {
         CafeKiosk cafeKiosk = new CafeKiosk();
         cafeKiosk.add(new Americano());
