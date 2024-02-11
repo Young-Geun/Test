@@ -119,6 +119,24 @@ class CafeKioskTest {
         assertThat(totalPrice).isEqualTo(8500);
     }
 
+    @Test
+    @DisplayName("주문 목록에 담긴 상품들의 총 금액을 계산할 수 있다.")
+    void calculateTotalPriceWithBDD() {
+        // Given : 시나리오 진행에 필요한 모든 준비 과정
+        CafeKiosk cafeKiosk = new CafeKiosk();
+        Americano americano = new Americano();
+        Latte latte = new Latte();
+
+        cafeKiosk.add(americano);
+        cafeKiosk.add(latte);
+
+        // When : 시나리오 행동 진행
+        int totalPrice = cafeKiosk.calculateTotalPrice();
+
+        // Then : 시나리오 진행에 대한 결과 명시, 검증
+        assertThat(totalPrice).isEqualTo(8500);
+    }
+
     /**
      * 주문시간인 경우에만 성공하는 케이스
      */
