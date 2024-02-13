@@ -1,7 +1,7 @@
 package org.example.kiosk.spring.api.service.product;
 
 import lombok.RequiredArgsConstructor;
-import org.example.kiosk.spring.api.controller.product.dto.request.ProductCreateRequest;
+import org.example.kiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import org.springframework.stereotype.Service;
 import org.example.kiosk.spring.api.service.product.response.ProductResponse;
 import org.example.kiosk.spring.domain.product.Product;
@@ -20,7 +20,7 @@ public class ProductService {
     private final ProductRepository productRepository;
 
     @Transactional
-    public ProductResponse createProduct(ProductCreateRequest request) {
+    public ProductResponse createProduct(ProductCreateServiceRequest request) {
         String nextProductNumber = createNextProductNumber();
 
         Product product = request.toEntity(nextProductNumber);

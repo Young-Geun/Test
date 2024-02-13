@@ -1,6 +1,7 @@
 package org.example.kiosk.spring.api.service.order;
 
 import lombok.RequiredArgsConstructor;
+import org.example.kiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.example.kiosk.spring.api.controller.order.request.OrderCreateRequest;
@@ -28,7 +29,7 @@ public class OrderService {
     private final OrderRepository orderRepository;
     private final StockRepository stockRepository;
 
-    public OrderResponse createOrder(OrderCreateRequest request, LocalDateTime registeredDateTime) {
+    public OrderResponse createOrder(OrderCreateServiceRequest request, LocalDateTime registeredDateTime) {
         List<String> productNumbers = request.getProductNumbers();
         List<Product> products = findProductsBy(productNumbers);
 
