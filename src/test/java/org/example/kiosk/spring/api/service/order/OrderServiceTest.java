@@ -55,6 +55,26 @@ class OrderServiceTest {
 
     @AfterEach
     void tearDown() {
+        /*
+            [ deleteAllInBatch()와 deleteAll() ]
+
+            1. 순서 고려
+               deleteAllInBatch()는 벌크성으로 데이터를 지울 수 있어서 좋은 메서드이지만, 순서를 잘 고려해야한다.
+               외래키 조건 등의 이유로 순서를 잘 고려해야한다.
+               때문에 orderProductRepository.deleteAllInBatch()가 제일 먼저 실행되어야한다.
+               ( * deleteAll()도 순서를 고려하긴 해야한다. )
+
+            2. deleteAllInBatch()와 deleteAll()의 성능 측면
+               만약 아래와 같이 deleteAll() 메서드를 변경하면, 전체 테이블을 조회한 후 1개씩 지우는 것을 로그로 확인할 수 있다.
+               즉, 성능상 유리한 것은 deleteAllInBatch()이 유리할 수 있다.
+
+               orderProductRepository.deleteAll();
+               productRepository.deleteAll();
+               orderRepository.deleteAll();
+
+           * 가장 좋은 것은 상황에 맞게
+             @Transactional / deleteAllInBatch() / deleteAll() 중 적절한 기술을 선택하는 것이다.
+         */
         orderProductRepository.deleteAllInBatch();
         productRepository.deleteAllInBatch();
         orderRepository.deleteAllInBatch();
