@@ -1,5 +1,6 @@
 package org.example.kiosk.spring.api.service.order;
 
+import org.example.kiosk.spring.IntegrationTestSupport;
 import org.example.kiosk.spring.api.service.order.request.OrderCreateServiceRequest;
 import org.example.kiosk.spring.domain.order.OrderRepository;
 import org.example.kiosk.spring.domain.orderproduct.OrderProductRepository;
@@ -34,9 +35,7 @@ import static org.example.kiosk.spring.domain.product.ProductType.*;
              이 때문에 테스트코드 작성 시 @Transactional을 사용하기보다는 @AfterEach 권장. 또는 @Transactional의 동작원리를 올바르게 인지한 상태로 사용.
  */
 // @Transactional
-@ActiveProfiles("test")
-@SpringBootTest
-class OrderServiceTest {
+class OrderServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductRepository productRepository;

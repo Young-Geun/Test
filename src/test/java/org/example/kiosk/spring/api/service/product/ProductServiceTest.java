@@ -1,5 +1,6 @@
 package org.example.kiosk.spring.api.service.product;
 
+import org.example.kiosk.spring.IntegrationTestSupport;
 import org.example.kiosk.spring.api.service.product.request.ProductCreateServiceRequest;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.DisplayName;
@@ -20,9 +21,7 @@ import static org.assertj.core.api.Assertions.tuple;
 import static org.example.kiosk.spring.domain.product.ProductSellingStatus.SELLING;
 import static org.example.kiosk.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-@SpringBootTest
-class ProductServiceTest {
+class ProductServiceTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductService productService;

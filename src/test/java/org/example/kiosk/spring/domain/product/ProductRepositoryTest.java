@@ -1,10 +1,13 @@
 package org.example.kiosk.spring.domain.product;
 
+import org.example.kiosk.spring.IntegrationTestSupport;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -13,10 +16,9 @@ import static org.assertj.core.api.Assertions.tuple;
 import static org.example.kiosk.spring.domain.product.ProductSellingStatus.*;
 import static org.example.kiosk.spring.domain.product.ProductType.HANDMADE;
 
-@ActiveProfiles("test")
-// @SpringBootTest
-@DataJpaTest // @SpringBootTest와 동일하게 스프링 서버를 띄우지만 JPA 관련 Bean만 띄우기 때문에 보다 가볍다.
-class ProductRepositoryTest {
+@Transactional
+// @DataJpaTest // @SpringBootTest와 동일하게 스프링 서버를 띄우지만 JPA 관련 Bean만 띄우기 때문에 보다 가볍다.
+class ProductRepositoryTest extends IntegrationTestSupport {
 
     @Autowired
     private ProductRepository productRepository;
